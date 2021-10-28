@@ -34,7 +34,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
-    implementation 'com.gitee.osard:alipaylibrary:1.0.0'
+    implementation 'com.gitee.osard:alipaylibrary:1.0.1'
 //    implementation project(path: ':alipaylibrary')
     implementation fileTree(dir: 'libs', include: ['alipaysdk.aar'])
     implementation 'com.alibaba:fastjson:1.2.78'
