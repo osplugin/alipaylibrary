@@ -5,11 +5,12 @@
 [![](https://jitpack.io/v/com.gitee.osard/alipaylibrary.svg)](https://jitpack.io/#com.gitee.osard/alipaylibrary)
 
 ### 一、项目介绍
-1. APP 使用示例项目，libs下含有以编译最新的aar资源。
+1. APP 使用示例项目，libs下含有以最新的支付宝sdk aar资源。
 2. AlipayLibrary arr资源项目，需要引入的资源包项目。
 3. jitpack 仓库在线引入即可
 4. 支付宝sdk单独引入
 5. 项目内支付宝sdk版本为 **alipaysdk-15.8.05.211018174351**
+6. 若使用比此版本更新的sdk时，必须将aar资源命名为**alipaysdk.aar**然后放入libs下进行引用
 
 ### 二、工程引入工具包
 **工程的build.gradle文件添加**
