@@ -78,7 +78,7 @@ dependencies {
 
 ### 四、状态码说明，枚举类
 
-1.  登录认证的 **ResultStatus**， 参考文档：https://opendocs.alipay.com/open/218/105327
+1.  登录认证的ResultStatus **枚举类：AliAuthResultStatus**， 参考文档：https://opendocs.alipay.com/open/218/105327
 ```java
     FAIL("4000", "系统异常"),
     USER_CANCELLED("6001", "用户中途取消"),
@@ -86,7 +86,7 @@ dependencies {
     SUCCEED("9000", "请求处理成功"),
     DEFAULT("-100000", "其他错误");
 ```
-2.  登录认证的 **ResultCode**， 参考文档：https://opendocs.alipay.com/open/218/105327
+2.  登录认证的ResultCode **枚举类：AliAuthResultCode**， 参考文档：https://opendocs.alipay.com/open/218/105327
 ```java
     SUCCEED("200", "业务处理成功，会返回 authCode"),
     SYSTEM_ANOMALY("202", "系统异常，请稍后再试或联系支付宝技术支持"),
@@ -94,7 +94,7 @@ dependencies {
 
     DEFAULT("-100000", "其他错误");
 ```
-3.  支付宝支付返回的状态码对应状态描述 **AliPayResultStatus**， 参考文档：https://opendocs.alipay.com/open/204/105301
+3.  支付宝支付返回的状态码对应状态描述 **枚举类：AliPayResultStatus**， 参考文档：https://opendocs.alipay.com/open/204/105301
 ```java
     FAIL(4000, "订单支付失败"),
     REPEATED_REQUESTS(5000, "重复请求"),
@@ -105,7 +105,7 @@ dependencies {
     SUCCEED(9000, "订单支付成功"),
     DEFAULT(-100000, "其他支付错误");
 ```
-4.  支付宝公共错误码 **AliPublicCodeErr**， 参考文档：https://opendocs.alipay.com/open/common/105806
+4.  支付宝公共错误码 **枚举类：AliPublicCodeErr**， 参考文档：https://opendocs.alipay.com/open/common/105806
 ```java
     SUCCEED(10000, "接口调用成功，调用结果请参考具体的 API 文档所对应的业务返回参数。"),
     SERVICE_UNAVAILABLE(20000, "服务不可用"),
