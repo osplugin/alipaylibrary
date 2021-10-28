@@ -11,6 +11,8 @@ import com.osard.alipaylibrary.callback.pay.AliPayFail;
 import com.osard.alipaylibrary.callback.pay.AliPaySucceed;
 import com.osard.alipaylibrary.enumeration.AliAuthResultCode;
 import com.osard.alipaylibrary.enumeration.AliAuthResultStatus;
+import com.osard.alipaylibrary.enumeration.AliPayResultStatus;
+import com.osard.alipaylibrary.enumeration.AliPublicCodeErr;
 import com.osard.alipaylibrary.result.AliPayResult;
 
 import java.util.Map;
@@ -70,12 +72,12 @@ public class AliPayUtil {
             String resultStatus = aliPayResult.getResultStatus();
             String resultCode = aliPayResult.getResultCode();
 
-            if (AliAuthResultStatus.USER_CANCELLED.getType().equals(resultStatus)) {
+            if (AliPayResultStatus.USER_CANCELLED.getType().equals(resultStatus)) {
                 if (null != userCancel) {
                     new Handler(Looper.getMainLooper()).post(() -> userCancel.userCancel());
                 }
-            } else if (AliAuthResultStatus.isSucceed(resultStatus)) {
-                if (AliAuthResultCode.isSucceed(resultCode)) {
+            } else if (AliPayResultStatus.isSucceed(resultStatus)) {
+                if (AliPublicCodeErr.isSucceed(resultCode)) {
                     if (null != succeed) {
                         new Handler(Looper.getMainLooper()).post(() -> succeed.succeed(aliPayResult));
                     }
