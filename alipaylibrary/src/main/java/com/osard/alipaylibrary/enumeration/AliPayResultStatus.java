@@ -21,7 +21,8 @@ public enum AliPayResultStatus {
     PAY_RESULT_UNKNOWN("6004", "支付结果未知（有可能已经支付成功），请查询商户订单列表中订单的支付状态"),
     PROCESSING("8000", "正在处理中，支付结果未知（有可能已经支付成功），请查询商户订单列表中订单的支付状态"),
     SUCCEED("9000", "订单支付成功"),
-    DEFAULT("-100000", "其他支付错误");
+
+    DEFAULT("-100000", "其他错误");
 
     private final static Map<String, AliPayResultStatus> MAP = new HashMap<>();
 

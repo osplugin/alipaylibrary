@@ -84,6 +84,7 @@ dependencies {
     USER_CANCELLED("6001", "用户中途取消"),
     NETWORK_ERROR("6002", "网络连接出错"),
     SUCCEED("9000", "请求处理成功"),
+
     DEFAULT("-100000", "其他错误");
 ```
 2.  登录认证的ResultCode **枚举类：AliAuthResultCode**， 参考文档：https://opendocs.alipay.com/open/218/105327
@@ -103,7 +104,8 @@ dependencies {
     PAY_RESULT_UNKNOWN("6004", "支付结果未知（有可能已经支付成功），请查询商户订单列表中订单的支付状态"),
     PROCESSING("8000", "正在处理中，支付结果未知（有可能已经支付成功），请查询商户订单列表中订单的支付状态"),
     SUCCEED("9000", "订单支付成功"),
-    DEFAULT("-100000", "其他支付错误");
+
+    DEFAULT("-100000", "其他错误");
 ```
 4.  支付宝公共错误码 **枚举类：AliPublicCodeErr**， 参考文档：https://opendocs.alipay.com/open/common/105806
 ```java
@@ -116,7 +118,7 @@ dependencies {
     FREQUENCY_TRANSFINITE("40005", "调用频次超限"),
     PERMISSION_DENIED_40006("40006", "权限不足"),
 
-    DEFAULT("-100000", "其他支付错误");
+    DEFAULT("-100000", "其他错误");
 ```
 
 License

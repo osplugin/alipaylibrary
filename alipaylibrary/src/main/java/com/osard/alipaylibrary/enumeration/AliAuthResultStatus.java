@@ -17,6 +17,7 @@ public enum AliAuthResultStatus {
     USER_CANCELLED("6001", "用户中途取消"),
     NETWORK_ERROR("6002", "网络连接出错"),
     SUCCEED("9000", "请求处理成功"),
+
     DEFAULT("-100000", "其他错误");
 
     private final static Map<String, AliAuthResultStatus> MAP = new HashMap<>();

@@ -23,7 +23,7 @@ public enum AliPublicCodeErr {
     FREQUENCY_TRANSFINITE("40005", "调用频次超限"),
     PERMISSION_DENIED_40006("40006", "权限不足"),
 
-    DEFAULT("-100000", "其他支付错误");
+    DEFAULT("-100000", "其他错误");
 
     private final static Map<String, AliPublicCodeErr> MAP = new HashMap<>();
 
