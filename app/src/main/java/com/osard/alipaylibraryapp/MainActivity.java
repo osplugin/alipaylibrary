@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         AliAuthUtil.newInstance()
                 .setSucceed(aliAuthResult -> {
-
+                    aliAuthResult.getAuthCode();
+                    aliAuthResult.getAlipayOpenId();
                 })
                 .setUserCancel(() -> {
 

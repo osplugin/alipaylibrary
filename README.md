@@ -61,7 +61,8 @@ dependencies {
 ```
         AliAuthUtil.newInstance()
                 .setSucceed(aliAuthResult -> {
-
+                    aliAuthResult.getAuthCode();
+                    aliAuthResult.getAlipayOpenId();
                 })
                 .setUserCancel(() -> {
 
