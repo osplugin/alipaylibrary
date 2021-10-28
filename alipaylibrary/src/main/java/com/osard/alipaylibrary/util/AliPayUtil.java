@@ -64,8 +64,7 @@ public class AliPayUtil {
         Thread payThread = new Thread(() -> {
             PayTask alipay = new PayTask(activity);
             Map<String, String> result = alipay.payV2(orderInfo, true);
-            Log.i("msp", result.toString());
-
+//            Log.i("msp", result.toString());
 
             AliPayResult aliPayResult = new AliPayResult(result);
             String resultStatus = aliPayResult.getResultStatus();
