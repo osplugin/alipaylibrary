@@ -31,7 +31,7 @@ allprojects {
 ```
 dependencies {
     ...
-    implementation 'com.gitee.osard:alipaylibrary:1.0.0'
+    implementation 'com.gitee.osard:alipaylibrary:1.0.1'
     //引入alipaylibrary.aar的依赖资源，以下2个
     implementation fileTree(dir: 'libs', include: ['alipaysdk.aar'])
     implementation 'com.alibaba:fastjson:1.2.78'
