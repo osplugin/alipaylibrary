@@ -69,10 +69,10 @@ public class AliAuthUtil {
             Map<String, String> result = authTask.authV2(authInfo, true);
 
             AliAuthResult aliAuthResult = new AliAuthResult(result, true);
-            String resultStatus = aliAuthResult.getResultStatus();
-            String resultCode = aliAuthResult.getResultCode();
+            AliAuthResultStatus resultStatus = aliAuthResult.getResultStatus();
+            AliAuthResultCode resultCode = aliAuthResult.getResultCode();
 
-            if (AliAuthResultStatus.USER_CANCELLED.getType().equals(resultStatus)) {
+            if (AliAuthResultStatus.USER_CANCELLED.equals(resultStatus)) {
                 if (null != userCancel) {
                     new Handler(Looper.getMainLooper()).post(() -> userCancel.userCancel());
                 }

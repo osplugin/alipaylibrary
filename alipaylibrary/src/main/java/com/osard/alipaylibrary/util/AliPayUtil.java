@@ -69,10 +69,10 @@ public class AliPayUtil {
 //            Log.i("msp", result.toString());
 
             AliPayResult aliPayResult = new AliPayResult(result);
-            String resultStatus = aliPayResult.getResultStatus();
-            String resultCode = aliPayResult.getResultCode();
+            AliPayResultStatus resultStatus = aliPayResult.getResultStatus();
+            AliPublicCodeErr resultCode = aliPayResult.getResultCode();
 
-            if (AliPayResultStatus.USER_CANCELLED.getType().equals(resultStatus)) {
+            if (AliPayResultStatus.USER_CANCELLED.equals(resultStatus)) {
                 if (null != userCancel) {
                     new Handler(Looper.getMainLooper()).post(() -> userCancel.userCancel());
                 }

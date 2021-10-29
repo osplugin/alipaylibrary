@@ -10,7 +10,6 @@
 3. jitpack 仓库在线引入即可
 4. 支付宝sdk单独引入
 5. 项目内支付宝sdk版本为 **alipaysdk-15.8.05.211018174351**
-6. 若使用比此版本更新的sdk时，必须将aar资源命名为**alipaysdk.aar**然后放入libs下进行引用
 
 ### 二、工程引入工具包
 **工程的build.gradle文件添加**
@@ -49,9 +48,9 @@ dependencies {
                 })
                 .setFail(aliPayResult -> {
                     //支付宝支付返回的状态码对应状态
-                    String resultStatus = aliPayResult.getResultStatus();
+                    AliPayResultStatus resultStatus = aliPayResult.getResultStatus();
                     //支付宝公共错误码
-                    String resultCode = aliPayResult.getResultCode();
+                    AliPublicCodeErr resultCode = aliPayResult.getResultCode();
                 })
                 .setUserCancel(() -> {
 
@@ -70,9 +69,9 @@ dependencies {
                 })
                 .setFail(aliAuthResult -> {
                     //支付宝登录认证的ResultStatus
-                    String resultStatus = aliAuthResult.getResultStatus();
+                    AliAuthResultStatus resultStatus = aliAuthResult.getResultStatus();
                     //支付宝登录认证的ResultCode
-                    String resultCode = aliAuthResult.getResultCode();
+                    AliAuthResultCode resultCode = aliAuthResult.getResultCode();
                 })
                 .authV2(this, "从服务器获取最终签名后的登录信息");
 ```
