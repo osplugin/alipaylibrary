@@ -42,6 +42,7 @@ dependencies {
 
 1.  支付
 ```java
+        //根据sdk要求，其中 this 参数为 Activity 对象
         AliPayUtil.newInstance()
                 .setSucceed(aliPayResult -> {
 
@@ -59,6 +60,7 @@ dependencies {
 ```
 2.  登录
 ```java
+        //根据sdk要求，其中 this 参数为 Activity 对象
         AliAuthUtil.newInstance()
                 .setSucceed(aliAuthResult -> {
                     aliAuthResult.getAuthCode();
