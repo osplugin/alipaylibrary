@@ -54,50 +54,41 @@ jobs:
             exit 1
           fi
 
-      - name: Trigger and Monitor JitPack Build
+      - name: Trigger JitPack Build
         env:
-          JITPACK_TOKEN: ${{ secrets.JITPACK_TOKEN }}
+          JITPACK_TOKEN: ${{ secrets.JITPACK_TOKEN }} # GitHub PAT with repo scope
         run: |
-          # 设置变量
+          # Keep original tag format (preserve 'v' prefix)
           VERSION=${{ github.event.release.tag_name }}
           OWNER=${{ github.repository_owner }}
           REPO=${{ github.event.repository.name }}
+          
+          echo "Triggering build for: com.github.$OWNER/$REPO@$VERSION"
+          
+          # JitPack API endpoint
           API_URL="https://jitpack.io/api/builds/com.github.$OWNER/$REPO/$VERSION"
           
-          echo "🚀 Triggering JitPack build for: com.github.$OWNER/$REPO@$VERSION"
-          echo "🔗 Build progress: https://jitpack.io/#$OWNER/$REPO/$VERSION"
-          
-          # 初始构建请求
-          echo "🔍 Making initial build request..."
+          # Make initial build request
+          echo "Making initial build request"
           RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" \
             -H "Authorization: Bearer $JITPACK_TOKEN" \
             "$API_URL")
           
+          # Extract HTTP status and response body
           HTTP_STATUS=$(echo "$RESPONSE" | grep HTTP_STATUS: | cut -d':' -f2)
           BODY=$(echo "$RESPONSE" | sed '/HTTP_STATUS:/d')
           
-          echo "📦 Initial API Response: $BODY"
-          echo "🔢 HTTP Status: $HTTP_STATUS"
+          echo "Initial API Response: $BODY"
+          echo "HTTP Status: $HTTP_STATUS"
           
           if [[ "$HTTP_STATUS" != "200" ]]; then
             echo "❌ Failed to trigger build (HTTP $HTTP_STATUS)"
             exit 1
           fi
           
-          # 状态检查设置
-          MAX_CHECKS=60  # 60次×30秒=30分钟
-          CHECK_INTERVAL=30
-          CHECK_COUNT=0
-          START_TIME=$(date +%s)
-          TIMEOUT=$((30 * 60))  # 30分钟超时（秒）
-          
-          while [[ $CHECK_COUNT -lt $MAX_CHECKS ]]; do
-            CURRENT_TIME=$(date +%s)
-            ELAPSED_TIME=$((CURRENT_TIME - START_TIME))
-          
-            ((CHECK_COUNT++))
-            echo "🔄 Check #$CHECK_COUNT/$MAX_CHECKS (Elapsed: $((ELAPSED_TIME/60))m $((ELAPSED_TIME%60))s)"
-          
+          # Check build status periodically
+          while true; do
+            echo "Checking build status..."
             STATUS_RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" \
               -H "Authorization: Bearer $JITPACK_TOKEN" \
               "$API_URL")
@@ -105,33 +96,20 @@ jobs:
             STATUS_HTTP=$(echo "$STATUS_RESPONSE" | grep HTTP_STATUS: | cut -d':' -f2)
             STATUS_BODY=$(echo "$STATUS_RESPONSE" | sed '/HTTP_STATUS:/d')
           
-            # 提取status字段
-            STATUS=$(echo "$STATUS_BODY" | grep -o '"status"[[:space:]]*:[[:space:]]*"[^"]*"' | head -1 | cut -d'"' -f4 | tr '[:upper:]' '[:lower:]')
+            # Extract status (case insensitive)
+            STATUS=$(echo "$STATUS_BODY" | grep -i -o '"status":"[^"]*"' | cut -d'"' -f4 | tr '[:upper:]' '[:lower:]')
           
-            echo "📊 Build status: ${STATUS:-unknown}"
-          
-            case "${STATUS}" in
-              "ok")
-                echo "🎉 ✅ Build succeeded!"
-                exit 0
-                ;;
-              "error")
-                echo "💥 ❌ Build failed!"
-                exit 1
-                ;;
-              *)
-                if [[ $CHECK_COUNT -eq $MAX_CHECKS ]]; then
-                  echo "⏰ Timeout reached (30 minutes). Build may still be processing on JitPack."
-                  echo "ℹ️ Note: JitPack builds can sometimes take longer than 30 minutes."
-                  echo "🔗 Check later at: https://jitpack.io/#$OWNER/$REPO/$VERSION"
-                  exit 0  # 非失败退出
-                fi
-                echo "⏳ Waiting $CHECK_INTERVAL seconds before next check..."
-                sleep $CHECK_INTERVAL
-                ;;
-            esac
+            if [[ "$STATUS" == "ok" ]]; then
+              echo "✅ Build succeeded!"
+              exit 0
+            elif [[ "$STATUS" == "error" ]]; then
+              echo "❌ Build failed!"
+              exit 1
+            else
+              echo "🔄 Build in progress (status: ${STATUS:-unknown}), waiting 30 seconds..."
+              sleep 30
+            fi
           done
-
       - name: Final Status
         run: |
           echo "🏁 JitPack build monitoring completed"
