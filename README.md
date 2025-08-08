@@ -2,7 +2,7 @@
 
 [![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![API](https://img.shields.io/badge/API-16%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=16)
-[![](https://jitpack.io/v/com.gitee.osard/alipaylibrary.svg)](https://jitpack.io/#com.gitee.osard/alipaylibrary)
+[![](https://jitpack.io/v/com.github.osplugin/alipaylibrary.svg)](https://jitpack.io/#com.github.osplugin/alipaylibrary)
 
 ### 一、项目介绍
 1. APP 使用示例项目，libs下含有以最新的支付宝sdk aar资源。
@@ -31,7 +31,7 @@ allprojects {
 ```
 dependencies {
     ...
-    implementation 'com.gitee.osard:alipaylibrary:1.0.2'
+    implementation 'com.github.osplugin:alipaylibrary:1.0.2'
     //引入alipaylibrary.aar的依赖资源，以下2个
     implementation fileTree(dir: 'libs', include: ['alipaysdk.aar'])
     implementation 'com.alibaba:fastjson:1.2.78'
